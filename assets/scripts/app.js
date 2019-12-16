@@ -1,7 +1,12 @@
 $(document).ready(function() {
+//date display for the heading.
+$('#currentDay').text(moment().format('dddd MMMM Do'));
 
 //load schedule from LS
-function getSchedule() {
+getScheduleFromLS();
+
+//load schedule from LS
+function getScheduleFromLS() {
   var schedule;
   if (localStorage.getItem("schedule") === null) {
     schedule = [];
@@ -10,13 +15,8 @@ function getSchedule() {
   }
 console.log(schedule);
 
-    // $.each(schedule, function()
-
-  $.each(schedule, function (index, value) {
-//   $(`.description`).append(value.plan);
-  $(`#${value.time}`).children('.description').append(value.plan);
-  console.log($(`#${value.time}`).children('.description'));
-  
+  $.each(schedule, function (index, item) {
+  $(`#${item.time}`).children('.description').append(item.plan);
         
 })}
 
@@ -34,20 +34,15 @@ function storeInLS(plan) {
 
  };
 
-getSchedule();
-
 $('.saveBtn').on('click', function() {
     var scheduleItem  = {
         'plan' : $(this).siblings('.description').val(),
         'time' : $(this).parent().attr('id') //this is the hour itself
     }
-
-  
     storeInLS(scheduleItem);
 
     console.log(scheduleItem);
     
 })
-$('#currentDay').text(moment().format('dddd MMMM Do'));
 
 })
