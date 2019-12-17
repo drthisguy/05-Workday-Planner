@@ -31,19 +31,19 @@ function storeInLS(plan) {
 
 function colorizor() {
     var timeOfDay = moment().hour();
-    console.log(timeOfDay);
+    var timeSlots = [9,10,11,12,13,14,15,16,17];
 
-    $.each(schedule, function (index, item) {
-        var timeSlot = index + 9
-        console.log(schedule);
-        
-        if ((timeOfDay > timeSlot)) {
-            $(`#${item.time}`).children('.description').addClass('past');
-        } else if (timeOfDay < timeSlot) {
-            $(`#${item.time}`).children('description').attr('.future');
-        } else {
-            ;
-        }
+    $.each(timeSlots, function (index, slot) {
+
+    var hrNum = slot < 13 ? slot : slot - 12;
+    
+    if ((timeOfDay > slot)) {
+        $('#hour-'+hrNum).children('.description').addClass('past');
+    } else if (timeOfDay < slot) {
+        $('#hour-'+hrNum).children('.description').addClass('future');
+    } else {
+        $('#hour-'+hrNum).children('.description').addClass('present');
+    }
 })};
 
 
