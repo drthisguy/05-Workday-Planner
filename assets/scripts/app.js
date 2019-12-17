@@ -3,8 +3,10 @@ $(document).ready(function() {
 $('#currentDay').text(moment().format('dddd MMMM Do'));
 
 var schedule;
-//load schedule from LS
+
+//load schedule from LS and color code time slots.
 getScheduleFromLS();
+colorizor();
 
 //load schedule from LS
 function getScheduleFromLS() {
@@ -23,6 +25,12 @@ function storeInLS(plan) {
     } else {
       schedule = JSON.parse(localStorage.getItem("schedule"))
     }
+
+    for (var i = 0; i < schedule.length; i++) {
+        if (plan.time === schedule[i].time) {
+          schedule.splice(schedule[i], 1); 
+      }}
+
     //add game to list
     schedule.push(plan);
     //set back in LS
@@ -36,7 +44,7 @@ function colorizor() {
     $.each(timeSlots, function (index, slot) {
 
     var hrNum = slot < 13 ? slot : slot - 12;
-    
+
     if ((timeOfDay > slot)) {
         $('#hour-'+hrNum).children('.description').addClass('past');
     } else if (timeOfDay < slot) {
@@ -47,7 +55,7 @@ function colorizor() {
 })};
 
 
-colorizor();
+
 $('.saveBtn').on('click', function() {
     var scheduleItem  = {
         'plan' : $(this).siblings('.description').val(),
