@@ -2,16 +2,15 @@ $(document).ready(function() {
 //date display for the heading.
 $('#currentDay').text(moment().format('dddd MMMM Do'));
 
-var schedule;
-
 //load schedule from LS and color code time slots.
 getScheduleFromLS();
 colorizor();
 
 //load schedule from LS
 function getScheduleFromLS() {
+    $('.description').empty();
   if (localStorage.getItem("schedule") === null) {
-    schedule = [];
+    var schedule = [];
   } else {
     schedule = JSON.parse(localStorage.getItem("schedule"));
   }
@@ -20,22 +19,24 @@ function getScheduleFromLS() {
 })}
 
 function storeInLS(plan) {
-    if (localStorage.getItem("schedule") === null) {
-      schedule = [];
-    } else {
-      schedule = JSON.parse(localStorage.getItem("schedule"))
-    }
+    
+if (localStorage.getItem("schedule") === null) {
+    //add new item to the schedule
+    var newSchedule = [plan];
+} else {
+    newSchedule = JSON.parse(localStorage.getItem("schedule"))
 
-    for (var i = 0; i < schedule.length; i++) {
-        if (plan.time === schedule[i].time) {
-          schedule.splice(schedule[i], 1); 
-      }}
-
-    //add game to list
-    schedule.push(plan);
-    //set back in LS
-    localStorage.setItem("schedule", JSON.stringify(schedule));
- }
+//check for and remove existing text from LS before replacing it. 
+for (var i = 0; i < newSchedule.length; i++) {
+    if (newSchedule[i].time === plan.time) {
+        newSchedule.splice(i, 1);  //remove & replace
+    }    
+}
+    newSchedule.push(plan);
+}
+//set back in LS
+localStorage.setItem("schedule", JSON.stringify(newSchedule));    
+}
 
 function colorizor() {
     var timeOfDay = moment().hour();
