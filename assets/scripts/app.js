@@ -8,7 +8,6 @@ colorizor();
 
 //load schedule from LS
 function getScheduleFromLS() {
-    $('.description').empty();
   if (localStorage.getItem("schedule") === null) {
     var schedule = [];
   } else {
@@ -18,24 +17,23 @@ function getScheduleFromLS() {
   $(`#${item.time}`).children('.description').append(item.plan);
 })}
 
-function storeInLS(plan) {
-    
-if (localStorage.getItem("schedule") === null) {
-    //add new item to the schedule
-    var newSchedule = [plan];
-} else {
-    newSchedule = JSON.parse(localStorage.getItem("schedule"))
+//store schedule in LS
+function storeScheduleInLS(plan) {
+    if (localStorage.getItem("schedule") === null) {
+        //add new item to the schedule
+        var newSchedule = [plan];
+    } else {
+        newSchedule = JSON.parse(localStorage.getItem("schedule"))
 
-//check for and remove existing text from LS before replacing it. 
-for (var i = 0; i < newSchedule.length; i++) {
-    if (newSchedule[i].time === plan.time) {
-        newSchedule.splice(i, 1);  //remove & replace
-    }    
-}
-    newSchedule.push(plan);
-}
-//set back in LS
-localStorage.setItem("schedule", JSON.stringify(newSchedule));    
+    //check for and remove existing text from LS before replacing it. 
+    for (var i = 0; i < newSchedule.length; i++) {
+        if (newSchedule[i].time === plan.time) {
+            newSchedule.splice(i, 1); 
+        }}  
+        newSchedule.push(plan);
+    }
+    //set back in LS
+    localStorage.setItem("schedule", JSON.stringify(newSchedule));
 }
 
 function colorizor() {
@@ -55,6 +53,19 @@ function colorizor() {
     }
 })};
 
+function clearPlan(domElement) {
+    //create element
+    clearBtn = $('<button>');
+    clearBtn.addClass('clear');
+    clearBtn.text('Cancel Plan');
+    domElement.append(clearBtn);
+
+    //add event listener
+    $('.clear').on('click', function(e) {
+        $(this).parent('.hour').siblings('.description').empty();
+        e.preventDefault();
+    })
+ };
 
 
 $('.saveBtn').on('click', function() {
@@ -62,7 +73,10 @@ $('.saveBtn').on('click', function() {
         'plan' : $(this).siblings('.description').val(),
         'time' : $(this).parent().attr('id') //this is the hour itself
     }
-    storeInLS(scheduleItem); 
+    var container = $(this).siblings('.hour');
+        
+    storeScheduleInLS(scheduleItem);
+    clearPlan(container); 
 })
 
 })
