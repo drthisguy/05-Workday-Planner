@@ -14,8 +14,13 @@ function getScheduleFromLS() {
     schedule = JSON.parse(localStorage.getItem("schedule"));
   }
   $.each(schedule, function (index, item) {
+    //populate each slot.
   $(`#${item.time}`).children('.description').append(item.plan);
-})}
+    //get clear btns for populated time slots. 
+    if(item.plan !== '') {
+        clearPlan($(`#${item.time}`).children('.hour'))
+}})}
+  
 
 //store schedule in LS
 function storeScheduleInLS(plan) {
@@ -54,6 +59,9 @@ function colorizor() {
 })};
 
 function clearPlan(domElement) {
+    //clear any existing btn
+    $(domElement).children('.clear').remove();
+
     //create element
     clearBtn = $('<button>');
     clearBtn.addClass('clear');
@@ -63,6 +71,7 @@ function clearPlan(domElement) {
     //add event listener
     $('.clear').on('click', function(e) {
         $(this).parent('.hour').siblings('.description').empty();
+        $(this).parent('.hour').siblings('.saveBtn').click();
         e.preventDefault();
     })
  };
@@ -70,7 +79,7 @@ function clearPlan(domElement) {
 
 $('.saveBtn').on('click', function() {
     var scheduleItem  = {
-        'plan' : $(this).siblings('.description').val(),
+        'plan' : $(this).siblings('.description').val().trim(),
         'time' : $(this).parent().attr('id') //this is the hour itself
     }
     var container = $(this).siblings('.hour');
