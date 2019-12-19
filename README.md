@@ -13,11 +13,10 @@ As is probably deduced, this an online trivia game, base on the popular Harry Po
 
 index.html
 app.js 
-questions.js
 LICENSE 
 README.md 
 style.css,
-Mics Audio sound clips
+
 
 # deployed application site:
 
@@ -25,7 +24,7 @@ Mics Audio sound clips
 https://drthisguy.github.io/Homework-5/
 
 # Screen Grabs:
-# Screen Grabs:
+
 
 https://user-images.githubusercontent.com/48693333/71195079-32ed4400-225b-11ea-862a-c6677504c16e.png
 
