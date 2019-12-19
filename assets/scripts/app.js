@@ -15,10 +15,10 @@ function getScheduleFromLS() {
   }
   $.each(schedule, function (index, item) {
     //populate each slot.
-  $(`#${item.time}`).children('.description').append(item.plan);
+  $('#'+item.time).children('.description').append(item.plan);
     //get clear btns for populated time slots. 
     if(item.plan !== '') {
-        clearPlan($(`#${item.time}`).children('.hour'))
+        clearPlan($('#'+item.time).children('.hour'))
 }})}
   
 
@@ -71,7 +71,8 @@ function clearPlan(domElement) {
     //add event listener
     $('.clear').on('click', function(e) {
         $(this).parent('.hour').siblings('.description').empty();
-        $(this).parent('.hour').siblings('.saveBtn').click();
+        $(this).parent('.hour').siblings('.saveBtn').click(); //resave
+        location.reload();                                    //remove btn
         e.preventDefault();
     })
  };
