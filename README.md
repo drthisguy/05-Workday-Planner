@@ -16,7 +16,7 @@ style.css,
 # deployed application site:
 
 
-https://drthisguy.github.io/Homework-5/
+https://drthisguy.github.io/05-Workday-Planner
 
 # Screen Grabs:
 
