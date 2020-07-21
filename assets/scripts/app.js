@@ -78,17 +78,17 @@ $(document).ready(function () {
         //add event listener
         $('.clear').on('click', function (event) {
             $(this).parent('.hour').siblings('.description').empty();
-            $(this).parent('.hour').siblings('.saveBtn').click(); //resave
+            $(this).parent('.hour').siblings('.saveBtn').click(); //re-save
             event.preventDefault();
-            location.reload();                                    //remove btn   
+            location.reload();                                   
         });
     }
 
     //save new item event
     $('.saveBtn').on('click', function () {
         var scheduleItem = {
-            'plan': $(this).siblings('.description').val().trim(),
-            'time': $(this).parent().attr('id') //this is the hour itself
+            plan: $(this).siblings('.description').val().trim(),
+            time: $(this).parent().attr('id') //this is the hour itself
         };
         var container = $(this).siblings('.hour');
 

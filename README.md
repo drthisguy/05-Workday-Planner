@@ -2,9 +2,9 @@
 Day Planner Application
 
 
-This is a simple day planner that covers your average 9-5 workday.  Users can easiy add, edit or remove itinerary items scheduled for the day.  Each time slot is color-coded to indicate past, present and future timeslots.    
+This is a simple day planner that covers your average 9-5 workday.  Users can easily add, edit or remove itinerary items scheduled for the day.  Each time slot is color-coded to indicate past, present and future time slots.    
 
-# file maifest:
+# file manifest:
 
 index.html
 app.js 
@@ -31,8 +31,7 @@ https://user-images.githubusercontent.com/48693333/71140868-7ce51400-21e0-11ea-9
 Contact: page.c.tyler@gmail.com
 
 Known issues.
-there should be faily decent cross-browser compatability here.  
-The 'cancel plan' button may need to be clicked twice if page has not been reloaded since the item in question was added.
+there should be fairly decent cross-browser compatibility here.  
 
 sources:
 
